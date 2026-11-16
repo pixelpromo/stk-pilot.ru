@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config';
+---
+
+<BaseLayout title={`Страница не найдена — ${site.name}`} noindex>
+  <section class="section" style="text-align:center;padding:120px 0">
+    <div class="container">
+      <h1 style="font-size:4rem;margin-bottom:8px">404</h1>
+      <p class="lead" style="margin-bottom:24px">Такой страницы нет — но трасса на месте.</p>
+      <a class="btn btn--primary btn--lg" href="/">На главную</a>
+    </div>
+  </section>
+</BaseLayout>

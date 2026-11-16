@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { site, asset } from '../config';
+import { pool } from '../data/content';
+---
+
+<BaseLayout
+  title={`Бассейн — ${site.name}`}
+  description="Бассейн на территории СТК «Пилот» в Усть-Лабинске: отдых у воды после заездов, для всей семьи."
+>
+  <section class="page-hero section section--soft">
+    <div class="container">
+      <div class="crumbs"><a href="/">Главная</a><span>/</span>Бассейн</div>
+      <span class="kicker">Отдых и сервис</span>
+      <h1>Бассейн</h1>
+      <p class="lead">{pool.lead}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="split-head">
+        <div>
+          <h2>Отдых у воды</h2>
+          <p class="lead">Бассейн расположен на территории комплекса — рядом с рестораном и зоной отдыха.</p>
+          <p class="lead">Актуальный прайс и правила посещения уточняйте по телефону.</p>
+          <a class="btn btn--leisure" href={pool.phone}>Узнать цену</a>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line)">
+          <img src={asset('/images/basseyn.jpg')} alt="Бассейн СТК «Пилот»" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:40px">
+    <div class="container">
+      <CTABanner
+        title="Посещение бассейна"
+        text="Уточните прайс и свободное время."
+        phone={pool.phone}
+        phoneDisplay={pool.phoneDisplay}
+        variant="leisure"
+      />
+    </div>
+  </section>
+</BaseLayout>

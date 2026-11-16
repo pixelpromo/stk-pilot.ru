@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CTABanner from '../components/CTABanner.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { site, phones, mainPhone, asset } from '../config';
+import { sportServices, leisureServices, trackFacts } from '../data/content';
+
+const keyFacts = trackFacts.filter((f) => ['Длина', 'Открытие', 'Сезон', 'Покрытие'].includes(f.label));
+---
+
+<BaseLayout title={`${site.name} — картинг, трек-дни и отдых в Усть-Лабинске`}>
+  <div class="checkered-strip" aria-hidden="true"></div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__media"><img src={asset('/images/hero.jpg')} alt="Трасса СТК «Пилот»" /></div>
+    <div class="container">
+      <div class="hero__inner">
+        <h1>Почувствуй дух соревнований на трассе мирового уровня</h1>
+        <p class="lead">
+          Прокатный картинг, трек-дни для авто и мото, дрифт-соревнования Drift Games Pro Am и Сочи Дрифт Челлендж —
+          и всё для комфортного отдыха: гостиница, ресторан, бани, бассейн и беседки.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" href="/karting/">Записаться на картинг</a>
+          <a class="btn btn--lg btn--light" href="/trek-dni/">Трек-день</a>
+          <a class="btn btn--lg btn--outline" href="/o-trasse/" style="border-color:rgba(255,255,255,.4);color:#fff;background:transparent">О комплексе</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Спорт / Отдых -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center" style="margin-bottom:64px">
+        <h2 class="nowrap-md">Спорт на трассе и комфортный отдых</h2>
+      </div>
+
+      <!-- Спорт -->
+      <div class="split-head" style="margin-bottom:20px">
+        <div>
+          <span class="chip chip--sport">Спорт на трассе</span>
+          <h3 class="headline--sport" style="margin-top:10px">Картинг, трек-дни, боксы</h3>
+        </div>
+        <p class="lead muted" style="margin:0">Тренировки и соревнования для пилотов любого уровня — от первого заезда на карте до аренды трассы под собственное мероприятие.</p>
+      </div>
+      <div class="grid grid--4">
+        {sportServices.map((s) => <ServiceCard service={s} />)}
+      </div>
+
+      <!-- Отдых -->
+      <div class="split-head" style="margin:56px 0 20px">
+        <div>
+          <span class="chip chip--leisure">Отдых и сервис</span>
+          <h3 class="headline--leisure" style="margin-top:10px">Гостиница, ресторан, бани, бассейн, беседки</h3>
+        </div>
+        <p class="lead muted" style="margin:0">После заездов — отдохните: переночуйте, поешьте, попаритесь в бане или проведите день у бассейна с семьёй.</p>
+      </div>
+      <div class="grid grid--3">
+        {leisureServices.map((s) => <ServiceCard service={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- О комплексе -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="split-head">
+        <div>
+          <span class="kicker">О комплексе</span>
+          <h2>1257 метров истории и скорости</h2>
+          <p class="lead">
+            Картодром открыт в 2008 году. Здесь прошла первая гонка в истории Российской Дрифт Серии,
+            а сегодня трасса принимает дрифт-чемпионаты Drift Games Pro Am и Сочи Дрифт Челлендж круглый год.
+          </p>
+          <a class="btn btn--primary" href="/o-trasse/">Подробнее о комплексе</a>
+        </div>
+        <div class="grid grid--2">
+          {keyFacts.map((f) => (
+            <div class="fact">
+              <div class="fact__value">{f.value}</div>
+              <div class="fact__label">{f.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Контакты + форма -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="split-head">
+        <div>
+          <span class="kicker">Контакты</span>
+          <h2>Позвоните — подберём и забронируем</h2>
+          <p class="lead">{site.address}</p>
+          <ul style="margin-top:18px">
+            {phones.map((p) => (
+              <li style="display:flex;flex-direction:column;margin-bottom:14px">
+                <a href={p.href} style="font-family:var(--font-display);font-weight:700;font-size:1.15rem">{p.display}</a>
+                <span class="muted" style="font-size:0.9rem">{p.purpose}</span>
+              </li>
+            ))}
+          </ul>
+          <a class="btn btn--outline" href={site.yandexMaps} rel="noopener" target="_blank" style="margin-top:8px">Открыть на карте</a>
+        </div>
+        <div>
+          <h3 style="margin-bottom:16px">Оставьте заявку — мы перезвоним</h3>
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <CTABanner
+        phone={mainPhone.href}
+        phoneDisplay={mainPhone.display}
+        secondary={{ label: 'Все контакты', href: '/kontakty/' }}
+      />
+    </div>
+  </section>
+</BaseLayout>

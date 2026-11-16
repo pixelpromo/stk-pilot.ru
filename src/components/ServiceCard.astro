@@ -1,0 +1,18 @@
+---
+import { asset } from '../config';
+import type { Service } from '../data/content';
+
+interface Props { service: Service }
+const { service } = Astro.props;
+---
+
+<a class="card" href={asset(service.href)}>
+  <img class="card__img" src={asset(service.image)} alt={service.title} loading="lazy" width="640" height="400" />
+  <div class="card__body">
+    <h3 class="card__title">{service.title}</h3>
+    <p class="card__text">{service.short}</p>
+    <div class="card__foot">
+      <span class={`btn btn--sm ${service.category === 'sport' ? 'btn--primary' : 'btn--leisure'}`} style="width:100%">Подробнее</span>
+    </div>
+  </div>
+</a>

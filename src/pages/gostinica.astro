@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { site, asset } from '../config';
+import { rooms } from '../data/content';
+---
+
+<BaseLayout
+  title={`Гостиница — ${site.name}`}
+  description="Гостиница при СТК «Пилот» в Усть-Лабинске: номера «Комфорт», «Люкс» и коттедж. Бронирование по телефону."
+>
+  <section class="page-hero section section--soft">
+    <div class="container">
+      <div class="crumbs"><a href="/">Главная</a><span>/</span>Гостиница</div>
+      <span class="kicker">Отдых и сервис</span>
+      <h1>Гостиница</h1>
+      <p class="lead">Комфортные номера на территории комплекса — удобно совместить заезды и отдых, не уезжая с трассы.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2">
+        {rooms.map((r) => (
+          <div class="card">
+            <div class="card__body" style="padding:26px">
+              <h3 class="card__title">{r.name}</h3>
+              <p class="card__text">{r.desc}</p>
+              <div class="card__meta">
+                <span class="card__price" style="color:var(--leisure)">{r.price}</span>
+                <a class="btn btn--leisure btn--sm" href="tel:+79186390397">Забронировать</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="split-head">
+        <div>
+          <h2>Отдохните после заездов</h2>
+          <p class="lead">Во всех номерах — холодильник, сплит-система, телевизор и санузел. Для семей и компаний есть номера на 3–4 места и коттедж.</p>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line)">
+          <img src={asset('/images/hotel.jpg')} alt="Номер гостиницы СТК «Пилот»" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:40px">
+    <div class="container">
+      <CTABanner
+        title="Забронировать номер"
+        text="Бронирование номеров гостиницы — по телефону."
+        phone="tel:+79186390397"
+        phoneDisplay="+7 (918) 639-03-97"
+        variant="leisure"
+      />
+    </div>
+  </section>
+</BaseLayout>

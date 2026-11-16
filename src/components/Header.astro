@@ -1,0 +1,80 @@
+---
+import { nav, site, mainPhone, asset } from '../config';
+import { sportServices, leisureServices } from '../data/content';
+const pathname = Astro.url.pathname;
+
+const isActive = (item: { href?: string }) =>
+  item.href ? (item.href === '/' ? pathname === asset('/') : pathname.startsWith(asset(item.href))) : false;
+
+// Большие выпадающие меню строим из тех же данных, что и карточки на главной.
+const mega: Record<string, { heading: string; desc: string; items: typeof sportServices }> = {
+  'Спортивные активности': {
+    heading: 'Спортивные активности',
+    desc: 'Картинг, трек-дни, аренда трассы и боксов — тренируйтесь и соревнуйтесь на картодроме.',
+    items: sportServices,
+  },
+  'Отдых и инфраструктура': {
+    heading: 'Отдых и инфраструктура',
+    desc: 'Гостиница, ресторан, бани, бассейн и беседки — всё для комфортного отдыха на территории комплекса.',
+    items: leisureServices,
+  },
+};
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href={asset('/')} class="brand" aria-label={`${site.name} — на главную`}>
+      <img src={asset('/images/logo.png')} alt={`${site.name} — логотип`} />
+    </a>
+
+    <ul class="nav" aria-label="Основная навигация">
+      {nav.map((item) => (
+        <li class={item.children ? 'has-mega' : undefined}>
+          {item.children ? (
+            <span class="nav-group-label">
+              {item.label}
+              <svg class="nav-group-label__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          ) : (
+            <a href={asset(item.href!)} aria-current={isActive(item) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          )}
+          {item.children && mega[item.label] && (
+            <div class={item.label === 'Отдых и инфраструктура' ? 'nav-mega nav-mega--right nav-mega--3col' : 'nav-mega'}>
+              <div class="nav-mega__head">
+                <span class="nav-mega__badge checkers" aria-hidden="true"></span>
+                <div class="nav-mega__head-text">
+                  <div class="nav-mega__title">{mega[item.label].heading}</div>
+                  <div class="nav-mega__desc">{mega[item.label].desc}</div>
+                </div>
+              </div>
+              <div class="nav-mega__grid">
+                {mega[item.label].items.map((s) => (
+                  <a class="mega-item" href={asset(s.href)}>
+                    <span class="mega-item__media">
+                      <img src={asset(s.image)} alt={s.title} loading="lazy" />
+                    </span>
+                    <span class="mega-item__title">{s.title}</span>
+                    <span class="mega-item__desc">{s.short}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+
+    <a class="btn btn--primary btn--sm header-cta" href={mainPhone.href}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      Позвонить
+    </a>
+
+    <button class="nav-toggle" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>

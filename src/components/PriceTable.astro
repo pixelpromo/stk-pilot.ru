@@ -1,0 +1,26 @@
+---
+import type { PriceBlock } from '../data/content';
+
+interface Props { blocks: PriceBlock[] }
+const { blocks } = Astro.props;
+---
+
+<div class="price-list">
+  {blocks.map((block) => (
+    <div class="price-block">
+      <div class="price-block__head">{block.title}</div>
+      {block.rows.map((row) => (
+        <div class="price-row">
+          <div>
+            <div class="price-row__name">{row.name}</div>
+            {row.note && <div class="price-row__note">{row.note}</div>}
+          </div>
+          <div class="price-row__price">
+            {row.price}
+            {row.period && <span style="font-weight:500;color:var(--muted);font-family:var(--font-body);font-size:0.85em"> / {row.period}</span>}
+          </div>
+        </div>
+      ))}
+    </div>
+  ))}
+</div>

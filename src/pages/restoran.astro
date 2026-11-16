@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { site, asset } from '../config';
+import { restaurant } from '../data/content';
+---
+
+<BaseLayout
+  title={`Ресторан Rosemary — ${site.name}`}
+  description="Ресторан Rosemary на территории СТК «Пилот» в Усть-Лабинске: европейская и русская кухня, банкетное меню, вид на бассейн."
+>
+  <section class="page-hero section section--soft">
+    <div class="container">
+      <div class="crumbs"><a href="/">Главная</a><span>/</span>Ресторан</div>
+      <span class="kicker">Отдых и сервис</span>
+      <h1>Ресторан Rosemary</h1>
+      <p class="lead">{restaurant.lead}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="split-head">
+        <div>
+          <div class="grid grid--2" style="gap:12px">
+            {restaurant.features.map((f) => (
+              <div class="fact">
+                <div class="fact__value" style="font-size:1rem">{f}</div>
+              </div>
+            ))}
+          </div>
+          <p class="lead" style="margin-top:20px">
+            Время работы: <strong>{restaurant.hours}</strong>
+          </p>
+          <a class="btn btn--leisure" href={restaurant.phone}>Забронировать стол</a>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line)">
+          <img src={asset('/images/restoran.jpg')} alt="Ресторан Rosemary" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:40px">
+    <div class="container">
+      <CTABanner
+        title="Забронировать стол или банкет"
+        text="Ресторан и беседки — по телефону."
+        phone={restaurant.phone}
+        phoneDisplay={restaurant.phoneDisplay}
+        variant="leisure"
+      />
+    </div>
+  </section>
+</BaseLayout>

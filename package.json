@@ -1,0 +1,21 @@
+{
+  "name": "stk-pilot",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "СТК «Пилот» — картинг-центр, трек-дни, дрифт-соревнования, гостиница и отдых в Усть-Лабинске",
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "astro": "ASTRO_TELEMETRY_DISABLED=1 astro",
+    "deploy": "ASTRO_TELEMETRY_DISABLED=1 astro build && gh-pages -d dist"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.5",
+    "astro": "^7.4.12"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  }
+}

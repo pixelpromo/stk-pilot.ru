@@ -1,0 +1,69 @@
+---
+import { nav, site, phones, socials, asset } from '../config';
+
+const sportGroup = nav.find((n) => n.label === 'Спортивные активности');
+const leisureGroup = nav.find((n) => n.label === 'Отдых и инфраструктура');
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href={asset('/')} class="footer-logo" aria-label={`${site.name} — на главную`}>
+          <img src={asset('/images/logo.png')} alt={`${site.name} — логотип`} />
+        </a>
+        <p>{site.tagline}. Картинг, трек-дни, дрифт-соревнования, гостиница, ресторан, бани, бассейн и беседки на одной территории.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px">
+          {socials.map((s) => (
+            <a href={s.href} rel="noopener" target="_blank" aria-label={s.label} style="font-size:0.9rem">{s.label}</a>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h4>Спортивные активности</h4>
+        <ul>
+          {sportGroup?.children.map((c) => (
+            <li><a href={asset(c.href)}>{c.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4>Отдых и инфраструктура</h4>
+        <ul>
+          {leisureGroup?.children.map((c) => (
+            <li><a href={asset(c.href)}>{c.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h4>Контакты</h4>
+        <ul>
+          {phones.map((p) => (
+            <li>
+              <a href={p.href}>{p.display}</a>
+              <span class="purpose">{p.purpose}</span>
+            </li>
+          ))}
+          <li>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+            <span class="purpose">{site.addressShort}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2008–{new Date().getFullYear()} {site.name}. Все права защищены.</span>
+      <span class="dev-copy">
+        <a href="https://pixelplus.ru/" target="pixelplus" aria-label="Создание сайта — компания Пиксель Плюс">
+          <img src={asset('/images/pixelplus-logo.png')} alt="Пиксель Плюс" />
+        </a>
+        <a href="https://pixelplus.ru/" target="pixelplus">Создание сайта</a> — компания <a href="https://pixelplus.ru/" target="pixelplus">Пиксель Плюс</a>
+      </span>
+      <a href={site.yandexMaps} rel="noopener" target="_blank">{site.addressShort}</a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { site, asset } from '../config';
+import { baths } from '../data/content';
+---
+
+<BaseLayout
+  title={`Бани — ${site.name}`}
+  description="Бани на территории СТК «Пилот» в Усть-Лабинске: две бани и общее отделение. Бронирование по телефону."
+>
+  <section class="page-hero section section--soft">
+    <div class="container">
+      <div class="crumbs"><a href="/">Главная</a><span>/</span>Бани</div>
+      <span class="kicker">Отдых и сервис</span>
+      <h1>Бани</h1>
+      <p class="lead">Две отдельные бани и общее отделение — согрейтесь и восстановитесь после заездов.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--3">
+        {baths.map((b) => (
+          <div class="card">
+            <div class="card__body" style="padding:28px;align-items:center;text-align:center">
+              <h3 class="card__title" style="font-size:1.3rem">{b.name}</h3>
+              <div style="font-family:var(--font-display);font-weight:700;font-size:2.2rem;color:var(--leisure)">{b.price}</div>
+              <div class="muted" style="font-size:0.95rem">/ {b.period}</div>
+              <a class="btn btn--leisure" href="tel:+79288409121" style="margin-top:12px">Забронировать</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="split-head">
+        <div>
+          <h2>После заездов — в баню</h2>
+          <p class="lead">Бронирование бань — по отдельному телефону.</p>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line)">
+          <img src={asset('/images/bani.jpg')} alt="Баня СТК «Пилот»" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:40px">
+    <div class="container">
+      <CTABanner
+        title="Забронировать баню"
+        text="Бронирование бань — по телефону."
+        phone="tel:+79288409121"
+        phoneDisplay="+7 (928) 840-91-21"
+        variant="leisure"
+      />
+    </div>
+  </section>
+</BaseLayout>

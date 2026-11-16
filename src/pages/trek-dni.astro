@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import PriceTable from '../components/PriceTable.astro';
+import { site } from '../config';
+import { trackDays } from '../data/content';
+---
+
+<BaseLayout
+  title={`Трек-дни — ${site.name}`}
+  description="Трек-дни на СТК «Пилот» в Усть-Лабинске: тренировки на авто, мотоцикле и карте, дрифт и ралли-спринт."
+>
+  <section class="page-hero section section--soft">
+    <div class="container">
+      <div class="crumbs"><a href="/">Главная</a><span>/</span>Трек-дни</div>
+      <span class="kicker">Спорт на трассе</span>
+      <h1>Трек-дни</h1>
+      <p class="lead">
+        Тренировки на своей технике: автомобили, мотоциклы и скутеры, карты, дрифт и ралли-спринт.
+        Сессии в будни и выходные.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Цены</span>
+        <h2>Стоимость тренировок</h2>
+      </div>
+      <PriceTable blocks={trackDays} />
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:40px">
+    <div class="container">
+      <CTABanner
+        title="Забронировать тренировку"
+        text="Подскажем свободные сессии в будни и выходные."
+        phone="tel:+78613542003"
+        phoneDisplay="+7 (861) 354-20-03"
+        secondary={{ label: 'Аренда трассы', href: '/arenda-trassy/' }}
+      />
+    </div>
+  </section>
+</BaseLayout>

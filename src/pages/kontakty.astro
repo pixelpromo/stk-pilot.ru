@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { site, phones, socials } from '../config';
+---
+
+<BaseLayout
+  title={`Контакты — ${site.name}`}
+  description={`Контакты СТК «Пилот»: ${site.addressShort}. Телефоны по направлениям, почта, соцсети и форма заявки.`}
+>
+  <section class="page-hero section section--soft">
+    <div class="container">
+      <div class="crumbs"><a href="/">Главная</a><span>/</span>Контакты</div>
+      <span class="kicker">Контакты</span>
+      <h1>Свяжитесь с нами</h1>
+      <p class="lead">{site.address}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="split-head">
+        <div>
+          <h2>Телефоны по направлениям</h2>
+          <p class="lead">Чтобы не ждать — звоните сразу в нужный отдел.</p>
+          <ul style="margin-top:20px">
+            {phones.map((p) => (
+              <li style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)">
+                <div>
+                  <a href={p.href} style="font-family:var(--font-display);font-weight:700;font-size:1.1rem">{p.display}</a>
+                  <div class="muted" style="font-size:0.9rem">{p.purpose}</div>
+                </div>
+                <a class="btn btn--primary btn--sm" href={p.href}>Позвонить</a>
+              </li>
+            ))}
+          </ul>
+
+          <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:12px">
+            <a class="btn btn--outline" href={`mailto:${site.email}`}>{site.email}</a>
+            <a class="btn btn--outline" href={site.yandexMaps} rel="noopener" target="_blank">Открыть на карте</a>
+          </div>
+
+          <div style="margin-top:28px">
+            <h3 style="font-size:1rem;text-transform:uppercase;letter-spacing:.06em">Соцсети</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              {socials.map((s) => (
+                <a class="btn btn--outline btn--sm" href={s.href} rel="noopener" target="_blank">{s.label}</a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 style="margin-bottom:16px">Оставьте заявку</h2>
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <h2>Режим работы</h2>
+      </div>
+      <div class="grid grid--2" style="max-width:640px">
+        <div class="fact">
+          <div class="fact__value">{site.hours}</div>
+          <div class="fact__label">Прокатный картинг и трасса</div>
+        </div>
+        <div class="fact">
+          <div class="fact__value">10:00–22:00</div>
+          <div class="fact__label">Ресторан Rosemary</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

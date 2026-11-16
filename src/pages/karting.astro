@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { site, asset } from '../config';
+import { karting } from '../data/content';
+---
+
+<BaseLayout
+  title={`Прокатный картинг — ${site.name}`}
+  description="Прокатный картинг в Усть-Лабинске на трассе СТК «Пилот»: карты 9 л/с и двухместный карт, экипировка и инструктаж включены."
+>
+  <section class="page-hero section section--soft">
+    <div class="container">
+      <div class="crumbs"><a href="/">Главная</a><span>/</span>Картинг</div>
+      <span class="kicker">Спорт на трассе</span>
+      <h1>Прокатный картинг</h1>
+      <p class="lead">{karting.lead}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2" style="max-width:760px">
+        {karting.cards.map((c) => (
+          <div class="card">
+            <div class="card__body" style="padding:28px;align-items:center;text-align:center">
+              <h3 class="card__title" style="font-size:1.3rem">{c.name}</h3>
+              <div style="font-family:var(--font-display);font-weight:700;font-size:2.2rem;color:var(--accent)">{c.price}</div>
+              <div class="muted" style="font-size:0.95rem">{c.period}</div>
+              <p class="card__text" style="text-align:center">{c.note}</p>
+              <a class="btn btn--primary" href={karting.phone}>Записаться</a>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="lead muted" style="margin-top:24px;max-width:760px">{karting.note}</p>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="split-head">
+        <div>
+          <h2>Как проходит заезд</h2>
+          <p class="lead">Минимальное время проката — 10 минут. На трассе одновременно предоставляется до 4 картов 9 л/с и один двухместный карт.</p>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line)">
+          <img src={asset('/images/karting.jpg')} alt="Прокатный картинг СТК «Пилот»" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:40px">
+    <div class="container">
+      <CTABanner
+        title="Записаться на картинг"
+        text="Уточните загруженность трассы и забронируйте удобное время."
+        phone={karting.phone}
+        phoneDisplay={karting.phoneDisplay}
+      />
+    </div>
+  </section>
+</BaseLayout>
